@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/wikankun/price-history-api/database"
@@ -78,9 +77,8 @@ func UpdatePriceHistory(w http.ResponseWriter, r *http.Request) {
 	json.Unmarshal(bodyBytes, &res)
 
 	price := entity.PriceHistory{
-		Item_ID:   item.ID,
-		Price:     uint(res.Price),
-		UpdatedAt: time.Now(),
+		Item_ID: item.ID,
+		Price:   uint(res.Price),
 	}
 
 	database.Connector.Create(&price)
